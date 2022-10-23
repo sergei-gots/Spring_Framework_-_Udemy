@@ -1,5 +1,5 @@
 # SpringFramework-UdemyCourse
-To the course "Spring Framework" by Nail Alishev
+To the course "Spring Framework" by Neil Alishev
 
 Spring - Полный курс. Boot, Hibernate, Security, REST.
 
