@@ -15,6 +15,8 @@ public class TestMusic {
         //Pure DEPENDENCY INJECTION is implemented here:
         MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
         musicPlayer.playMusic();
+        System.out.println("musicPlayer.name = " + musicPlayer.getName());
+        System.out.println("musicPlayer.volume = " + musicPlayer.getVolume());
 
         context.close();
     }

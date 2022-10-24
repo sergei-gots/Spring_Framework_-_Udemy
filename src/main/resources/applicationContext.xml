@@ -7,6 +7,8 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
     <bean id="testBean"
         class="org.gots.springcourse.TestBean">
         <constructor-arg value="Sergei"/>
@@ -21,7 +23,15 @@
     <!-- DEPENDECY INJECTION is here: -->
     <bean id="musicPlayer"
         class="org.gots.springcourse.music.MusicPlayer">
-        <constructor-arg ref="musicBean"/>
+        <!-- <constructor-arg ref="musicBean"/> -->
+        <!-- the next <property>-tag uses the setter-method setMusic(music Music).
+           property name="music" pointers to this method:
+            'm' will be replaced to 'setM' (with capitalizing of 'm')
+            and music will be transformed to 'setMusic' - the name of our setter-method.
+         -->
+        <property name="music" ref="musicBean"/>
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
 
 </beans>
