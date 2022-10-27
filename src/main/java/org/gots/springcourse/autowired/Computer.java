@@ -21,6 +21,11 @@ public class Computer {
     }
 
     public static void main(String[] args) {
+        lesson_11_1();
+    }
+
+    public static void lesson_11_1() {
+
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContextComponents.xml");
         Computer computer = context.getBean("computer", Computer.class);
