@@ -20,16 +20,46 @@
         <!--   class="org.gots.springcourse.music.LoungeMusic"-->
     </bean>
 
+    <bean id="musicBean1"
+          class="org.gots.springcourse.music.ClassicalMusic">
+    </bean>
+    <bean id="musicBean2"
+          class="org.gots.springcourse.music.RockMusic">
+    </bean>
+    <bean id="musicBean3"
+          class="org.gots.springcourse.music.LoungeMusic">
+    </bean>
+
     <!-- DEPENDECY INJECTION is here: -->
     <bean id="musicPlayer"
-        class="org.gots.springcourse.music.MusicPlayer">
+        class="org.gots.springcourse.music.MusicPlayer"
+        scope="prototype">
         <!-- <constructor-arg ref="musicBean"/> -->
         <!-- the next <property>-tag uses the setter-method setMusic(music Music).
            property name="music" pointers to this method:
             'm' will be replaced to 'setM' (with capitalizing of 'm')
-            and music will be transformed to 'setMusic' - the name of our setter-method.
+            and music will be transformed to
+
+            'setMusic'
+                           - it's the name of our setter-method.
          -->
         <property name="music" ref="musicBean"/>
+
+        <!-- Correspondingly, for this property with the name 'musicList'
+            within the class MusicPlayer
+            should exist the method
+
+            'setMusicList(List<Music>)'
+        -->
+        <property name="musicList">
+            <list value-type="org.gots.springcourse.music.Music">
+                <ref bean="musicBean1"/>
+                <ref bean="musicBean2"/>
+                <ref bean="musicBean3"/>
+            </list>
+        </property>
+
+
         <property name="name" value="${musicPlayer.name}"/>
         <property name="volume" value="${musicPlayer.volume}"/>
     </bean>

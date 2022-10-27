@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="SpringApp-1" />
+        <module name="spring-app-1" />
       </profile>
     </annotationProcessing>
   </component>

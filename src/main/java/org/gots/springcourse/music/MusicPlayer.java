@@ -17,15 +17,27 @@ public class MusicPlayer {
         this.music = music;
     }
 
-    public void playMusic() {
+    public void playMusic() { playMusic(music); }
+    public void playMusic(Music music) {
         System.out.println("Playing: " + music.getSong());
     }
 
+    public void playMusicList() {
+        System.out.println("Playing a music list:");
+        for (Music music: musicList) {
+            System.out.print('\t');
+            playMusic(music);
+        }
+    }
     public MusicPlayer() {
     }
 
     public void setMusic(Music music) {
         this.music = music;
+    }
+
+    public void setMusicList(List<Music> musicList) {
+        this.musicList = musicList;
     }
 
     public String getName() {
@@ -42,5 +54,10 @@ public class MusicPlayer {
 
     public void setVolume(int volume) {
         this.volume = volume;
+    }
+
+    public void printInfo() {
+        System.out.println("musicPlayer.name = " + getName());
+        System.out.println("musicPlayer.volume = " + getVolume());
     }
 }
