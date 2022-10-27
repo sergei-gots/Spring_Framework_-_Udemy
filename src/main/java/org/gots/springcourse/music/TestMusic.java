@@ -18,9 +18,18 @@ public class TestMusic {
 
         musicPlayer.printInfo();
         musicPlayer.playMusic();
+
+        //To the homework to the Lesson 7:
         musicPlayer.playMusicList();
 
-        checkBeanScope_Lesson_8(context);
+        //checkBeanScope_Lesson_8(context);
+
+        //To the Lesson 9  "Bean Life cycle"
+        System.out.println("""
+                //To the Lesson 9  "Bean Life cycle"
+                Music ClassicalMusic = context.getBean("musicBean", ClassicalMusic.class);
+                """);
+        Music ClassicalMusic = context.getBean("musicBean", ClassicalMusic.class);
 
         context.close();
     }
