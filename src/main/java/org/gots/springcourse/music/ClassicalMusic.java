@@ -1,5 +1,8 @@
 package org.gots.springcourse.music;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ClassicalMusic implements Music {
     private static int instancesCounter;
     private ClassicalMusic() {}

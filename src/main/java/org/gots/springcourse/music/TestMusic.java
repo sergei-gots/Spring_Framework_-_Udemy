@@ -1,17 +1,53 @@
 package org.gots.springcourse.music;
 
-import org.gots.springcourse.TestBean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 public class TestMusic {
 
+    private enum Lessons {
+        LESSONS_1_9,
+        LESSON_5,
+        LESSON_7_HOMEWORK,
+        LESSON_8,
+        LESSON_9,
+        LESSON_10
+    };
+
+    static Lessons lessonID;
     private static MusicPlayer musicPlayer;
 
     public static void main(String[] args) {
+        lessonID = Lessons.LESSON_10;
+        switch (lessonID) {
+            case LESSONS_1_9:
+            case LESSON_5:
+            case LESSON_7_HOMEWORK:
+            case LESSON_8:
+                            lessons_1_9();      break;
+            case LESSON_10: lesson_10();        break;
+        }
+    }
+
+    public static void lesson_10() {
+        ClassPathXmlApplicationContext context =
+                new ClassPathXmlApplicationContext("applicationContextComponents.xml");
+
+        Music music1 = context.getBean("rockMusic", Music.class);
+        Music music2 = context.getBean("classicalMusic", Music.class);
+        MusicPlayer musicPlayer = new MusicPlayer(music1);
+        MusicPlayer classicalMusicPlayer = new MusicPlayer(music2);
+        musicPlayer.playMusic();
+        classicalMusicPlayer.playMusic();
+
+        context.close();
+    }
+
+    public static void lessons_1_9() {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        //createMusicPlayer_Lesson_5(context);
+        if(lessonID == Lessons.LESSON_5) {    createMusicPlayer_Lesson_5(context);  }
 
         //Pure DEPENDENCY INJECTION is implemented here:
         musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
@@ -19,18 +55,15 @@ public class TestMusic {
         musicPlayer.printInfo();
         musicPlayer.playMusic();
 
-        //To the homework to the Lesson 7:
-        musicPlayer.playMusicList();
-
-        //checkBeanScope_Lesson_8(context);
-
-        //To the Lesson 9  "Bean Life cycle"
-        System.out.println("""
-                //To the Lesson 9  "Bean Life cycle"
-                Music ClassicalMusic = context.getBean("musicBean", ClassicalMusic.class);
-                """);
-        Music ClassicalMusic = context.getBean("musicBean", ClassicalMusic.class);
-
+        if(lessonID == Lessons.LESSON_7_HOMEWORK)   {   musicPlayer.playMusicList(); }
+        if (lessonID == Lessons.LESSON_8)           {   checkBeanScope_Lesson_8(context); }
+        if (lessonID == Lessons.LESSON_9) {
+            System.out.println("""
+                    //To the Lesson 9  "Bean Life cycle"
+                    Music ClassicalMusic = context.getBean("musicBean", ClassicalMusic.class);
+                    """);
+            Music ClassicalMusic = context.getBean("musicBean", ClassicalMusic.class);
+        }
         context.close();
     }
 
