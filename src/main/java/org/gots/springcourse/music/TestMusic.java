@@ -11,14 +11,15 @@ public class TestMusic {
         LESSON_7_HOMEWORK,
         LESSON_8,
         LESSON_9,
-        LESSON_10
+        LESSON_10,
+        LESSON_11
     };
 
     static Lessons lessonID;
     private static MusicPlayer musicPlayer;
 
     public static void main(String[] args) {
-        lessonID = Lessons.LESSON_10;
+        lessonID = Lessons.LESSON_11;
         switch (lessonID) {
             case LESSONS_1_9:
             case LESSON_5:
@@ -26,9 +27,18 @@ public class TestMusic {
             case LESSON_8:
                             lessons_1_9();      break;
             case LESSON_10: lesson_10();        break;
+            case LESSON_11: lesson_11();        break;
         }
     }
 
+    public static void lesson_11() {
+        ClassPathXmlApplicationContext context =
+                new ClassPathXmlApplicationContext("applicationContextComponents.xml");
+        MusicPlayer_Autowired musicPlayer = context.getBean("musicPlayer_Autowired", MusicPlayer_Autowired.class);
+        musicPlayer.playMusic();
+
+        context.close();
+    }
     public static void lesson_10() {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContextComponents.xml");
