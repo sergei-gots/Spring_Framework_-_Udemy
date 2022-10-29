@@ -5,4 +5,14 @@ public class LoungeMusic implements Music {
     public String getSong() {
         return "Big dream";
     }
+
+    @Override
+    public String getSong(int i) {
+        return getSong();
+    }
+
+    @Override
+    public int getId() {
+        return -1;
+    }
 }

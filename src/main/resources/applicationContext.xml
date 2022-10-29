@@ -21,7 +21,7 @@
           factory-method="getClassicalMusic"
           init-method="doMyInit"
           destroy-method="doMyDestroy"
-          scope="prototype">
+          scope="singleton">
         <!--   class="org.gots.springcourse.music.RockMusic"-->
         <!--   class="org.gots.springcourse.music.LoungeMusic"-->
     </bean>

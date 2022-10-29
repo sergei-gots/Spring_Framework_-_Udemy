@@ -15,26 +15,29 @@ public class TestMusic {
         LESSON_10,
         LESSON_11,
         LESSON_11_1,
-        LESSON_12
+        LESSON_12,
+        LESSON_12_HOMEWORK,
+        LESSON_13
+
     };
 
     static Lessons lessonID;
     private static MusicPlayer musicPlayer;
 
     public static void main(String[] args) {
-        lessonID = Lessons.LESSON_12;
+        lessonID = Lessons.LESSON_13;
+        System.out.println("lessonID = " + lessonID);
         switch (lessonID) {
             case LESSONS_1_9:
             case LESSON_5:
             case LESSON_7_HOMEWORK:
-            case LESSON_8:
-                            lessons_1_9();          break;
-            case LESSON_10: lesson_10();            break;
-            case LESSON_11: lesson_11();            break;
-            case LESSON_11_1: Computer.lesson_11_1();
-                                                    break;
-            case LESSON_12: MusicPlayer_Qualifier.lesson_12();
-                                                    break;
+            case LESSON_8:              lessons_1_9();                              break;
+            case LESSON_10:             lesson_10();                                break;
+            case LESSON_11:             lesson_11();                                break;
+            case LESSON_11_1:           Computer.lesson_11_1();                     break;
+            case LESSON_12:             MusicPlayer_Qualifier.lesson_12();          break;
+            case LESSON_12_HOMEWORK:    MusicPlayer_Qualifier.lesson_12_Homework(); break;
+            case LESSON_13:             MusicPlayer_Qualifier.lesson_13();          break;
         }
     }
 

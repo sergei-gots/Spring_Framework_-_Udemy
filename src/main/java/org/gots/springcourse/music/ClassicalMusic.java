@@ -1,13 +1,44 @@
 package org.gots.springcourse.music;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Component
+//@Scope("singleton")
+//@Scope("prototype")
 public class ClassicalMusic implements Music {
+    public final static String BEAN_NAME = "classicalMusic";
+
+    private int id;
     private static int instancesCounter;
-    private ClassicalMusic() {}
+    private String[] compositions;
+    private ClassicalMusic() {
+        printMethod("CONSTRUCTOR");
+        id = instancesCounter;
+        compositions = new String[PLAYER_LIST_CAPACITY];
+        compositions[0] = "Barber - Adagio for Strings";
+        compositions[1] = "Brahms - Piano Concerto No. 1, Op. 15";
+        compositions[2] = "Saint-Saens - The Carnival of Animals: XIII, The Swan";
+    }
+
+    @Override
+    public int getId() {    return id;  }
+
+    public static void printMethod(String method) {
+        System.out.print('#');
+        System.out.print(instancesCounter);
+        System.out.print(". ");
+        System.out.print(method);
+        System.out.println("-Method (Class ClassicalMusic)");
+    }
+    @Bean
     public static ClassicalMusic getClassicalMusic() {
         instancesCounter++;
+        printMethod("FACTORY");
         return new ClassicalMusic();
     }
     @Override
@@ -15,11 +46,17 @@ public class ClassicalMusic implements Music {
         return "Hungarian Rhapsody";
     }
 
-    public void doMyInit() {
-        System.out.println(instancesCounter + ") Doing my initialisation");  }
+    @Override
+    public String getSong(int i) {
+        return compositions[i];
+    }
 
+    @PostConstruct
+    public void doMyInit() {  printMethod("INIT");  }
+
+    @PreDestroy
     public void doMyDestroy() {
-        System.out.println(instancesCounter + ") Doing my destruction");
+        printMethod("DESTROY");
         instancesCounter--;
     }
 }
