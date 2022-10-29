@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class MusicPlayer_Autowired {
+public class MusicPlayer_Autowired implements IMusicPlayer {
 
     //@Autowired
     private ClassicalMusic classicalMusic;

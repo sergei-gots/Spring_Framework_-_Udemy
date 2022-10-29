@@ -1,6 +1,8 @@
 package org.gots.springcourse.autowired;
 
+import org.gots.springcourse.music.IMusicPlayer;
 import org.gots.springcourse.music.MusicPlayer_Autowired;
+import org.gots.springcourse.music.MusicPlayer_Qualifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
@@ -8,13 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class Computer {
     private int id;
-    private MusicPlayer_Autowired musicPlayer;
+    private IMusicPlayer musicPlayer;
 
     @Autowired
-    public Computer(MusicPlayer_Autowired musicPlayer) {
+    public Computer(IMusicPlayer musicPlayer) {
         id = 1;
         this.musicPlayer = musicPlayer;
     }
+
     @Override
     public String toString() {
         return "Computer " + id + ". MusicPlayer:\n" + musicPlayer;

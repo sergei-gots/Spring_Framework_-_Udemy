@@ -15,4 +15,8 @@ public class LoungeMusic implements Music {
     public int getId() {
         return -1;
     }
+    @Override
+    public void printId() {
+        System.out.println(-1);
+    }
 }

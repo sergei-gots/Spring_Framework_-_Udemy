@@ -1,5 +1,6 @@
 package org.gots.springcourse.music;
 
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +16,7 @@ import java.util.Random;
 import static java.lang.System.out;
 
 @Component
-public class MusicPlayer_Qualifier {
+public class MusicPlayer_Qualifier implements IMusicPlayer {
 
     /* @Autowired
     @Qualifier ("classicalMusic")
@@ -51,6 +52,7 @@ public class MusicPlayer_Qualifier {
         music[MusicGenres.CLASSICAL.ordinal()] = music1;
         music[MusicGenres.ROCK.ordinal()] = music2;
         out.println("MusicPlayer_Qualifier-CONSTRUCTOR finished");
+        if(musicPlayer==null) { musicPlayer = this; }
     }
 
     public void playMusic() {
@@ -80,7 +82,7 @@ public class MusicPlayer_Qualifier {
         musicPlayer = context.getBean("musicPlayer_Qualifier", MusicPlayer_Qualifier.class);
     }
 
-    public static void close() {    context.close();    }
+    public static void close() {    if(context != null) context.close();    }
     public static void lesson_12() {
         init();
 
@@ -99,29 +101,36 @@ public class MusicPlayer_Qualifier {
         return true;
     }
 
-    public static void lesson_13() {
-
-        init();
-        musicPlayer.printInfo();
-
+    public static void testSingletonPrototypeScopeBehaviour(BeanFactory context) {
         ClassicalMusic classicalMusic1 = context.getBean(ClassicalMusic.BEAN_NAME, ClassicalMusic.class);
         ClassicalMusic classicalMusic2 = context.getBean(ClassicalMusic.BEAN_NAME, ClassicalMusic.class);
         boolean theSame = (classicalMusic1 == classicalMusic2);
 
-       exploreAnnotations(ClassicalMusic.class);
+        exploreAnnotations(ClassicalMusic.class);
 
-        out.println("Let's check for @Scope(\"singleton\" or \"prototype\"):" );
+        out.println("Let's check for @Scope(\"singleton\" or \"prototype\"):");
         out.println("classicalMusic1 == classicalMusic2 = " + theSame);
-        if(theSame == true) {
+        if (theSame == true) {
             out.println("\tThere is the only instance of " + ClassicalMusic.class.getSimpleName() + " => the actual scope=\"singleton\"");
         } else {
             out.println("\tThere are several instances of " + ClassicalMusic.class.getSimpleName() + " => the actual scope=\"prototype\"");
         }
         out.println("Let's check id-s of our Music-objects:");
-        out.println("music[MusicGenres.ROCK.ordinal()].getId() = " + musicPlayer.music[MusicGenres.ROCK.ordinal()].getId());
-        out.println("music[MusicGenres.CLASSICAL.ordinal()].getId() = " + musicPlayer.music[MusicGenres.CLASSICAL.ordinal()].getId());
-        out.println("classicalMusic1.getId() = " + classicalMusic1.getId());
-        out.println("classicalMusic2.getId() = " + classicalMusic2.getId());
+        out.print("music[MusicGenres.CLASSICAL.ordinal()].");
+        musicPlayer.music[MusicGenres.CLASSICAL.ordinal()].printId();
+        out.print("music[MusicGenres.ROCK.ordinal()].");
+        musicPlayer.music[MusicGenres.ROCK.ordinal()].printId();
+        out.print("classicalMusic1.");
+        classicalMusic1.printId();
+        out.print("classicalMusic2.");
+        classicalMusic2.printId();
+    }
+    public static void lesson_13() {
+
+        init();
+        musicPlayer.printInfo();
+
+        testSingletonPrototypeScopeBehaviour(context);
 
         close();
     }
@@ -140,11 +149,11 @@ public class MusicPlayer_Qualifier {
                 out.println("\t\t\t\t its value=\"" + value + "\"");
                 if (value.compareTo("prototype") == 0) {
                     out.println("\t\t\t\t\t@Scope(\"prototype\") =>" +
-                            "\n\t\t\t\t\t\t\ta) the DESTROY-method WON'T BE CALLED" +
+                            "\n\t\t\t\t\t\t\ta) the DESTROY-method WON'T BE INVOKED (?actually it is invoked once)" +
                             "\n\t\t\t\t\t\t\tb) created BEANS of ClassicalMusic WILL DIFFER");
                 } else {
                     out.println("\t\t\t\t\t\t@Scope(\"singleton\")  =>" +
-                            "\n\t\t\t\t\t\t\ta) the DESTROY-method WILL BE CALLED if declared" +
+                            "\n\t\t\t\t\t\t\ta) the DESTROY-method WILL BE INVOKED if declared" +
                             "\n\t\t\t\t\t\t\tb) created BEANS of ClassicalMusic WILL BE represented by THE SAME ONLY OBJECT");
                 }
             }
@@ -152,7 +161,7 @@ public class MusicPlayer_Qualifier {
         out.println("""
                     NOTA BENE:
                         It seems that:
-                            - the annotation @Scope does not affect scope of beans      :(
+                            - the annotation @Scope does affect scope of beans only if AnnotationConfigApplicationContext is used!
                             - the annotation @Bean does not affect factoring of beans   :( 
                     """);
     }

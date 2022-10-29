@@ -10,30 +10,40 @@ import javax.annotation.PreDestroy;
 import static java.lang.System.out;
 
 @Component
-//NOTA BENE: The annotation @Scope seems to be not affecting the actual scope of bean.
+//NOTA BENE: The annotation @Scope seems to be affecting the actual scope of bean
+// only if AnnotationConfigApplicationContext is used.
 //@Scope("singleton")
-//@Scope("prototype")
+@Scope("prototype")
 public class ClassicalMusic implements Music {
     public final static String BEAN_NAME = "classicalMusic";
 
     private int id;
+    private int factoryId;
+    private static int factoryInstancesCounter;
     private static int instancesCounter;
     private String[] compositions;
-    private ClassicalMusic() {
+    //private
+    public ClassicalMusic() {
         printMethod("CONSTRUCTOR");
-        id = instancesCounter;
+        factoryId = factoryInstancesCounter;
+        id = ++instancesCounter;
         compositions = new String[PLAYER_LIST_CAPACITY];
         compositions[0] = "Barber - Adagio for Strings";
         compositions[1] = "Brahms - Piano Concerto No. 1, Op. 15";
         compositions[2] = "Saint-Saens - The Carnival of Animals: XIII, The Swan";
-        out.println("\tid=" + id + ", ref=" + this);
+        printId();
     }
+    @Override
+    public void printId() {
+        out.println("id=" + id + ", factoryId=" + factoryId + ", ref=" + this);
+    }
+
 
     @Override
     public int getId() {    return id;  }
 
     public static void printMethod(String method) {
-        out.print('#');
+        out.print("#FactoryID=");
         out.print(instancesCounter);
         out.print(". ");
         out.print(method);
@@ -42,7 +52,7 @@ public class ClassicalMusic implements Music {
     //NOTA BENE: The annotation @Bean seems to be not affecting the factoring of beans.
     @Bean
     public static ClassicalMusic getClassicalMusic() {
-        instancesCounter++;
+        factoryInstancesCounter++;
         printMethod("FACTORY");
         return new ClassicalMusic();
     }

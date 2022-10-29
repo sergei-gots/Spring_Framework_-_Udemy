@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class MusicPlayer {
+public class MusicPlayer implements IMusicPlayer {
     private Music music;
 
     private List<Music> musicList = new ArrayList<>();

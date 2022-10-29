@@ -1,6 +1,7 @@
 package org.gots.springcourse.music;
 
 import org.gots.springcourse.autowired.Computer;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
@@ -17,7 +18,8 @@ public class TestMusic {
         LESSON_11_1,
         LESSON_12,
         LESSON_12_HOMEWORK,
-        LESSON_13
+        LESSON_13,
+        LESSON_14
 
     };
 
@@ -25,7 +27,7 @@ public class TestMusic {
     private static MusicPlayer musicPlayer;
 
     public static void main(String[] args) {
-        lessonID = Lessons.LESSON_13;
+        lessonID = Lessons.LESSON_14;
         System.out.println("lessonID = " + lessonID);
         switch (lessonID) {
             case LESSONS_1_9:
@@ -38,9 +40,17 @@ public class TestMusic {
             case LESSON_12:             MusicPlayer_Qualifier.lesson_12();          break;
             case LESSON_12_HOMEWORK:    MusicPlayer_Qualifier.lesson_12_Homework(); break;
             case LESSON_13:             MusicPlayer_Qualifier.lesson_13();          break;
+            case LESSON_14:             lesson_14();                                break;
         }
     }
 
+    public static void lesson_14() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        MusicPlayer_Qualifier musicPlayer = context.getBean("musicPlayer_Qualifier", MusicPlayer_Qualifier.class);
+        musicPlayer.printInfo();
+        musicPlayer.testSingletonPrototypeScopeBehaviour(context);
+        context.close();
+    }
     public static void lesson_11() {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContextComponents.xml");

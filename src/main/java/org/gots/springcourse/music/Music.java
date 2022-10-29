@@ -5,4 +5,5 @@ public interface Music {
     String getSong();
     String getSong(int i);
     int getId();
+    public void printId();
 }
