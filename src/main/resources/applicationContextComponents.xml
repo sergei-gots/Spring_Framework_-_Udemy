@@ -13,7 +13,10 @@
     <bean id="classicalMusic"
           class="org.gots.springcourse.music.ClassicalMusic"
           factory-method="getClassicalMusic"
+          scope="prototype"
+        /> <!--
+
           init-method="doMyInit"
           destroy-method="doMyDestroy"
-          scope="prototype"/>
+          /-->
 </beans>

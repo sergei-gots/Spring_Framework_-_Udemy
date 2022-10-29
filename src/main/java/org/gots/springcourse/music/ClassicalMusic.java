@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import static java.lang.System.out;
+
 @Component
+//NOTA BENE: The annotation @Scope seems to be not affecting the actual scope of bean.
 //@Scope("singleton")
 //@Scope("prototype")
 public class ClassicalMusic implements Music {
@@ -23,18 +26,20 @@ public class ClassicalMusic implements Music {
         compositions[0] = "Barber - Adagio for Strings";
         compositions[1] = "Brahms - Piano Concerto No. 1, Op. 15";
         compositions[2] = "Saint-Saens - The Carnival of Animals: XIII, The Swan";
+        out.println("\tid=" + id + ", ref=" + this);
     }
 
     @Override
     public int getId() {    return id;  }
 
     public static void printMethod(String method) {
-        System.out.print('#');
-        System.out.print(instancesCounter);
-        System.out.print(". ");
-        System.out.print(method);
-        System.out.println("-Method (Class ClassicalMusic)");
+        out.print('#');
+        out.print(instancesCounter);
+        out.print(". ");
+        out.print(method);
+        out.println("-Method (Class ClassicalMusic)");
     }
+    //NOTA BENE: The annotation @Bean seems to be not affecting the factoring of beans.
     @Bean
     public static ClassicalMusic getClassicalMusic() {
         instancesCounter++;
