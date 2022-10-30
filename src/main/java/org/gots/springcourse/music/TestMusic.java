@@ -1,6 +1,8 @@
 package org.gots.springcourse.music;
 
 import org.gots.springcourse.autowired.Computer;
+import org.gots.springcourse.music.config.SpringConfig;
+import org.gots.springcourse.music.genres.Music;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,7 +21,8 @@ public class TestMusic {
         LESSON_12,
         LESSON_12_HOMEWORK,
         LESSON_13,
-        LESSON_14
+        LESSON_14,
+        LESSON_14_HOMEWORK
 
     };
 
@@ -27,7 +30,7 @@ public class TestMusic {
     private static MusicPlayer musicPlayer;
 
     public static void main(String[] args) {
-        lessonID = Lessons.LESSON_14;
+        lessonID = Lessons.LESSON_14_HOMEWORK;
         System.out.println("lessonID = " + lessonID);
         switch (lessonID) {
             case LESSONS_1_9:
@@ -41,6 +44,7 @@ public class TestMusic {
             case LESSON_12_HOMEWORK:    MusicPlayer_Qualifier.lesson_12_Homework(); break;
             case LESSON_13:             MusicPlayer_Qualifier.lesson_13();          break;
             case LESSON_14:             lesson_14();                                break;
+            case LESSON_14_HOMEWORK:    MusicPlayer_L14_Homework.L14_Homework();    break;
         }
     }
 
@@ -92,7 +96,7 @@ public class TestMusic {
                     //To the Lesson 9  "Bean Life cycle"
                     Music ClassicalMusic = context.getBean("musicBean", ClassicalMusic.class);
                     """);
-            Music ClassicalMusic = context.getBean("musicBean", ClassicalMusic.class);
+            Music ClassicalMusic = context.getBean("musicBean", org.gots.springcourse.music.genres.ClassicalMusic.class);
         }
         context.close();
     }

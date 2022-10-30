@@ -1,4 +1,4 @@
-package org.gots.springcourse.music;
+package org.gots.springcourse.music.genres;
 
 public enum MusicGenres {
     CLASSICAL,

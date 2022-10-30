@@ -1,10 +1,9 @@
 package org.gots.springcourse.music;
 
+import org.gots.springcourse.music.genres.ClassicalMusic;
+import org.gots.springcourse.music.genres.RockMusic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class MusicPlayer_Autowired implements IMusicPlayer {
@@ -27,6 +26,7 @@ public class MusicPlayer_Autowired implements IMusicPlayer {
         this.classicalMusic = classicalMusic;
     }
 
+    @Override
     public void playMusic() {
         System.out.println(this);
     }

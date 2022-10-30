@@ -11,7 +11,7 @@
     <context:component-scan base-package="org.gots.springcourse"/>
 
     <bean id="classicalMusic"
-          class="org.gots.springcourse.music.ClassicalMusic"
+          class="org.gots.springcourse.music.genres.ClassicalMusic"
           factory-method="getClassicalMusic"
           scope="prototype"
         /> <!--

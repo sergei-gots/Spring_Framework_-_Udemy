@@ -1,7 +1,9 @@
 package org.gots.springcourse.music;
 
+import org.gots.springcourse.music.genres.ClassicalMusic;
+import org.gots.springcourse.music.genres.Music;
+import org.gots.springcourse.music.genres.MusicGenres;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -55,6 +57,8 @@ public class MusicPlayer_Qualifier implements IMusicPlayer {
         if(musicPlayer==null) { musicPlayer = this; }
     }
 
+
+    @Override
     public void playMusic() {
         out.println(this);
     }

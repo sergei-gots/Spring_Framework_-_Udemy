@@ -17,23 +17,23 @@
     <!-- BE ATTENTIVE: DESTROY-method WON'T BE CALLED if scope="prototype"  -->
     <!-- BE ATTENTIVE: FACTORY-method WILL CREATE ONLY ONE SINGLETONE INSTANCE if scope="singleton" -->
     <bean id="musicBean"
-          class="org.gots.springcourse.music.ClassicalMusic"
+          class="org.gots.springcourse.music.genres.ClassicalMusic"
           factory-method="getClassicalMusic"
           init-method="doMyInit"
           destroy-method="doMyDestroy"
           scope="singleton">
-        <!--   class="org.gots.springcourse.music.RockMusic"-->
-        <!--   class="org.gots.springcourse.music.LoungeMusic"-->
+        <!--   class="org.gots.springcourse.music.genres.RockMusic"-->
+        <!--   class="org.gots.springcourse.music.genres.LoungeMusic"-->
     </bean>
 
     <bean id="musicBean1"
-          class="org.gots.springcourse.music.ClassicalMusic">
+          class="org.gots.springcourse.music.genres.ClassicalMusic">
     </bean>
     <bean id="musicBean2"
-          class="org.gots.springcourse.music.RockMusic">
+          class="org.gots.springcourse.music.genres.RockMusic">
     </bean>
     <bean id="musicBean3"
-          class="org.gots.springcourse.music.LoungeMusic">
+          class="org.gots.springcourse.music.genres.LoungeMusic">
     </bean>
 
     <!-- DEPENDECY INJECTION is here: -->
@@ -58,7 +58,7 @@
             'setMusicList(List<Music>)'
         -->
         <property name="musicList">
-            <list value-type="org.gots.springcourse.music.Music">
+            <list value-type="org.gots.springcourse.music.genres.Music">
                 <ref bean="musicBean1"/>
                 <ref bean="musicBean2"/>
                 <ref bean="musicBean3"/>

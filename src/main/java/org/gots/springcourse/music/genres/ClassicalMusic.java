@@ -1,4 +1,4 @@
-package org.gots.springcourse.music;
+package org.gots.springcourse.music.genres;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;

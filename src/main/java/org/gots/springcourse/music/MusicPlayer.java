@@ -1,5 +1,6 @@
 package org.gots.springcourse.music;
 
+import org.gots.springcourse.music.genres.Music;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class MusicPlayer implements IMusicPlayer {
         this.music = music;
     }
 
+    @Override
     public void playMusic() { playMusic(music); }
     public void playMusic(Music music) {
         System.out.println("Playing: " + music.getSong());

@@ -1,5 +1,6 @@
-package org.gots.springcourse.music;
+package org.gots.springcourse.music.genres;
 
+import org.gots.springcourse.music.genres.Music;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,19 +17,9 @@ public class RockMusic implements Music {
     public String getSong() {
         return "Wind cries Mary";
     }
-
     @Override
     public String getSong(int i) {
         return compositions[i];
      }
 
-    @Override
-    public int getId() {
-        return -1;
-    }
-
-    @Override
-    public void printId() {
-        System.out.println(-1);
-    }
 }
